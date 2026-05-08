@@ -85,7 +85,7 @@ Use the `skill` tool to load `keyword-deep-dive`. Pass the primary topic from St
 
 ### 2b: Competitor deep-dive with agent-browser
 
-For each of the top 3 competitors (and up to 2 more from the SERP if significantly different in approach), use agent-browser to visit their pages:
+For each of the top 4 competitors (and up to 1 more from the SERP if significantly different in approach), use agent-browser to visit their pages:
 
 ```
 agent-browser open <competitor-url>
@@ -105,7 +105,7 @@ For each competitor page, document the same profile as Stage 1:
 - Schema used
 - Content length
 
-Also search the primary topic on at least two search engines (Google + Brave or DuckDuckGo) and extract entities visible directly on the SERP (featured snippets, PAA questions, knowledge panels, site names in top results).
+Also search the primary topic on at least two search engines (Google + Brave. If both fail try DuckDuckGo) and extract entities visible directly on the SERP (featured snippets, PAA questions, knowledge panels, site names in top results).
 
 ---
 
@@ -113,9 +113,9 @@ Also search the primary topic on at least two search engines (Google + Brave or 
 
 Build an entity frequency matrix. Across the SERP and all competitor pages analyzed:
 
-| Entity | SERP | Comp 1 | Comp 2 | Comp 3 | Total |
-|--------|------|--------|--------|--------|-------|
-| ...    |      |        |        |        |       |
+| Entity | SERP | Comp 1 | Comp 2 | Comp 3 | Comp 4| Total |
+|--------|------|--------|--------|--------|-------|-------|
+| ...    |      |        |        |        |       |       |
 
 **Table stakes** — Entities that appear most frequently across sources. These are must-include topics.
 
@@ -133,7 +133,7 @@ Use the `skill` tool to load `content-brief`. Pass the primary topic and the ran
 
 The content-brief skill handles SERP analysis and brief generation. Supplement its output with these decisions derived from Stages 1-3:
 
-**Content type** — Based on the source page type and what the SERP rewards for this topic. Pick one type and commit to it.
+**Content type** — Based on the source page type and what the SERP rewards for this topic. Pick the most logical type and commit to it.
 
 **External sources** — Which external sites (max 3) should be cited? Prefer authoritative, non-competitor sources.
 
@@ -147,9 +147,11 @@ The content-brief skill handles SERP analysis and brief generation. Supplement i
 
 **Code snippets** — Does this topic benefit from code examples? If the content type is How-to or Guide and the topic is technical, include them.
 
-**Lists** — Where ordered or unordered lists improve scannability. Tables preferred over lists but don't force it.
+**Lists** — Use ordered or unordered lists to improve scannability. Tables preferred over lists but don't force it.
 
 **Hub/spoke classification** — Is this topic a potential hub page, a spoke page to existing content, both, or neither? This feeds internal linking decisions in Stage 7.
+
+**Sitemap review** — Before writing, find the target site's XML sitemap by first visiting `/robots.txt`. Note what pages exist for internal linking opportunities by examining the slug.
 
 ---
 
@@ -159,19 +161,17 @@ Use the `skill` tool to load `write-content`. Pass the full content brief from S
 
 The `write-content` skill handles research, content type templates, knowledge extraction, and voice-driven writing. Follow it exactly. Additionally, apply these rules:
 
-**Outline** — Draft an outline based on observations from all prior stages. Follow SEO best practices. The outline must reflect the entity priorities from Stage 3.
+**Outline** — Draft an outline based on observations from all prior stages. Follow SEO best practices. The outline must reflect the entity priorities from Stage 3 and the content brief from Stage 4.
 
-**H1** — The primary keyword or phrase must appear in the H1. No exceptions.
+**H1** — The primary keyword or phrase must appear in the H1. No exceptions. H1 must use sentence case.
 
-**H2s** — Optimize H2s but less aggressively than the H1. Question headers are effective and should be used often, but not exclusively or excessively.
+**H2s** — Optimize H2s but less aggressively than the H1. Question headers are effective and should be used often, but not exclusively or excessively. Subheaders must use sentence case.
 
 **Question headers** — If a header is a question, the content immediately following must answer that question directly. Do not preamble or delay the answer.
 
 **External links** — Link to external sources a maximum of 3 times. Choose authoritative, non-competitor domains.
 
-**Sitemap review** — Before writing, find the target site's XML sitemap by first visiting `/robots.txt`. Note what pages exist for internal linking opportunities.
-
-**Anchor text** — Be purposeful. Never over-optimize. Provide opportunities for anchor text that is semantically similar to the primary keyword of the target URL. This matters for Stage 7.
+**Anchor text** — Consider the sitemap review from Stage 4. Be purposeful. Provide opportunities for anchor text that is semantically similar to the primary keyword of the target URL. Never over-optimize. This matters for Stage 7.
 
 **Content rules**:
 - Never use em dashes
@@ -180,7 +180,7 @@ The `write-content` skill handles research, content type templates, knowledge ex
 - End with a next step: learning more on a different webpage, trying a tool, visiting a website, or taking some kind of action — even if it does not benefit our website
 - Do not be pushy in the next-step ending
 
-**Writing voice** — Follow the anti-slop ruleset from `write-content`: no banned vocabulary, no banned phrases, no banned structural patterns. Practitioner tone. Show, don't just state.
+**Writing voice** — Follow the anti-slop ruleset from `write-content`: no banned vocabulary, no banned phrases, no banned structural patterns. Practitioner tone. Show, don't just state. Do not use the first-person voice.
 
 ---
 
@@ -205,7 +205,8 @@ Produce a verification report. The article must be clean of unverifiable content
 Use the `skill` tool to load `internal-linking-seo`. Pass the verified article and the sitemap data from Stage 5.
 
 - Prioritize highly relevant pages in the same content cluster (identified in Stages 1-2)
-- Always use anchor text that could describe the content of the target URL
+- Start with exact matches of the primary keyword. 
+- Always use anchor text that could be used describe the content of the target URL
 - Anchor text must appear naturally in body text — rewrite surrounding content slightly to create a natural insertion point, but the meaning of the content must not drift
 - Follow `internal-linking-seo` rules for matching pipeline, skip rules, and link density (2-5 links per 1,000 words, max 150 total)
 
@@ -219,6 +220,7 @@ Write the meta title (50-60 characters) and meta description (150-155 characters
 
 Read the completed article end to end. Verify:
 - [ ] H1 contains primary keyword
+- [ ] All headers use sentence case
 - [ ] No em dashes anywhere
 - [ ] Question headers are answered immediately
 - [ ] Maximum 3 external links
