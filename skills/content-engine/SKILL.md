@@ -85,7 +85,7 @@ Use the `skill` tool to load `keyword-deep-dive`. Pass the primary topic from St
 
 ### 2b: Competitor deep-dive with agent-browser
 
-For each of the top 4 competitors (and up to 1 more from the SERP if significantly different in approach), use agent-browser to visit their pages:
+For each of the top 3 competitors (and up to 2 more from the SERP if significantly different in approach), use agent-browser to visit their pages:
 
 ```
 agent-browser open <competitor-url>
@@ -105,7 +105,7 @@ For each competitor page, document the same profile as Stage 1:
 - Schema used
 - Content length
 
-Also search the primary topic on at least two search engines (Google + Brave. If both fail try DuckDuckGo) and extract entities visible directly on the SERP (featured snippets, PAA questions, knowledge panels, site names in top results).
+Also search the primary topic on at least two search engines (Google + Brave or DuckDuckGo) and extract entities visible directly on the SERP (featured snippets, PAA questions, knowledge panels, site names in top results).
 
 ---
 
@@ -113,9 +113,9 @@ Also search the primary topic on at least two search engines (Google + Brave. If
 
 Build an entity frequency matrix. Across the SERP and all competitor pages analyzed:
 
-| Entity | SERP | Comp 1 | Comp 2 | Comp 3 | Comp 4| Total |
-|--------|------|--------|--------|--------|-------|-------|
-| ...    |      |        |        |        |       |       |
+| Entity | SERP | Comp 1 | Comp 2 | Comp 3 | Total |
+|--------|------|--------|--------|--------|-------|
+| ...    |      |        |        |        |       |
 
 **Table stakes** — Entities that appear most frequently across sources. These are must-include topics.
 
@@ -133,7 +133,7 @@ Use the `skill` tool to load `content-brief`. Pass the primary topic and the ran
 
 The content-brief skill handles SERP analysis and brief generation. Supplement its output with these decisions derived from Stages 1-3:
 
-**Content type** — Based on the source page type and what the SERP rewards for this topic. Pick the most logical type and commit to it.
+**Content type** — Based on the source page type and what the SERP rewards for this topic. Pick one type and commit to it.
 
 **External sources** — Which external sites (max 3) should be cited? Prefer authoritative, non-competitor sources.
 
@@ -147,11 +147,9 @@ The content-brief skill handles SERP analysis and brief generation. Supplement i
 
 **Code snippets** — Does this topic benefit from code examples? If the content type is How-to or Guide and the topic is technical, include them.
 
-**Lists** — Use ordered or unordered lists to improve scannability. Tables preferred over lists but don't force it.
+**Lists** — Where ordered or unordered lists improve scannability. Tables preferred over lists but don't force it.
 
 **Hub/spoke classification** — Is this topic a potential hub page, a spoke page to existing content, both, or neither? This feeds internal linking decisions in Stage 7.
-
-**Sitemap review** — Before writing, find the target site's XML sitemap by first visiting `/robots.txt`. Note what pages exist for internal linking opportunities by examining the slug.
 
 ---
 
@@ -161,17 +159,19 @@ Use the `skill` tool to load `write-content`. Pass the full content brief from S
 
 The `write-content` skill handles research, content type templates, knowledge extraction, and voice-driven writing. Follow it exactly. Additionally, apply these rules:
 
-**Outline** — Draft an outline based on observations from all prior stages. Follow SEO best practices. The outline must reflect the entity priorities from Stage 3 and the content brief from Stage 4.
+**Outline** — Draft an outline based on observations from all prior stages. Follow SEO best practices. The outline must reflect the entity priorities from Stage 3.
 
-**H1** — The primary keyword or phrase must appear in the H1. No exceptions. H1 must use sentence case.
+**H1** — The primary keyword or phrase must appear in the H1. No exceptions.
 
-**H2s** — Optimize H2s but less aggressively than the H1. Question headers are effective and should be used often, but not exclusively or excessively. Subheaders must use sentence case.
+**H2s** — Optimize H2s but less aggressively than the H1. Question headers are effective and should be used often, but not exclusively or excessively.
 
 **Question headers** — If a header is a question, the content immediately following must answer that question directly. Do not preamble or delay the answer.
 
 **External links** — Link to external sources a maximum of 3 times. Choose authoritative, non-competitor domains.
 
-**Anchor text** — Consider the sitemap review from Stage 4. Be purposeful. Provide opportunities for anchor text that is semantically similar to the primary keyword of the target URL. Never over-optimize. This matters for Stage 7.
+**Sitemap review** — Before writing, ask the user for the target site's XML sitemap URL. Do not assume the source URL's domain is the target domain. Ask explicitly: "What is the target site's post/page sitemap URL? (e.g. https://yoursite.com/post-sitemap.xml)" If unavailable, fall back to the source domain's robots.txt. Parse the full sitemap to build an internal linking candidate inventory for Stage 7.
+
+**Anchor text** — Be purposeful. Never over-optimize. Provide opportunities for anchor text that is semantically similar to the primary keyword of the target URL. This matters for Stage 7.
 
 **Content rules**:
 - Never use em dashes
@@ -180,7 +180,7 @@ The `write-content` skill handles research, content type templates, knowledge ex
 - End with a next step: learning more on a different webpage, trying a tool, visiting a website, or taking some kind of action — even if it does not benefit our website
 - Do not be pushy in the next-step ending
 
-**Writing voice** — Follow the anti-slop ruleset from `write-content`: no banned vocabulary, no banned phrases, no banned structural patterns. Practitioner tone. Show, don't just state. Do not use the first-person voice.
+**Writing voice** — Follow the anti-slop ruleset from `write-content`: no banned vocabulary, no banned phrases, no banned structural patterns. Practitioner tone. Show, don't just state.
 
 ---
 
@@ -188,13 +188,37 @@ The `write-content` skill handles research, content type templates, knowledge ex
 
 Use the `skill` tool to load `fact-checker`. Pass the full draft article from Stage 5.
 
-Apply the SIFT methodology (Stop, Investigate source, Find better coverage, Trace claims) to every verifiable claim in the article.
+Apply the SIFT methodology (Stop, Investigate source, Find better coverage, Trace claims) to every verifiable claim in the article. Follow the `fact-checker` skill's workflow exactly.
 
-**Hard rule**: If a claim cannot be verified, remove it. Do not soften it. Do not hedge it. Remove it.
+### Independent verification requirement
+
+**The source URL from Stage 1 is a banned verification source.** Do not use it to confirm any claim. The draft article was derived from that source, so matching it proves nothing. This is circular reasoning and produces false confidence.
+
+For every claim in the draft, trace it to a source that is independent of the Stage 1 URL:
+
+| Claim origin | Allowed verification | Disallowed |
+|---|---|---|
+| Statistic cited in source article | Find the original study, report, or dataset | Source article itself |
+| Quote attributed to a person | Find the full transcript, recording, or post | Source article's quote block |
+| Product/company detail | Check the company's own documentation or site | Source article's description |
+| Historical comparison or precedent | Find independent reporting from the time | Source article's historical reference |
+| Research finding | Access the primary research directly | Source article's summary of the research |
+
+If a claim traces back only to the source article and no independent source can be found, mark it **Unverifiable** and remove it.
+
+### What "independent" means
+
+A source is independent if it exists separately from the Stage 1 URL and was not cited or paraphrased from it. Examples:
+- The original research paper, not the news article describing it
+- The company's own public documentation, not the article's characterization
+- A separate news outlet's reporting on the same event, confirming it independently
+- A public database, court record, or government filing
+
+**Hard rule**: If a claim cannot be verified against at least one independent source, remove it. Do not soften it. Do not hedge it. Do not keep it with a "per WIRED reporting" attribution. Remove it.
 
 Verify: statistics, dates, product claims, attributions, technical assertions, comparisons, pricing, and any statements presented as fact.
 
-Produce a verification report. The article must be clean of unverifiable content before proceeding to Stage 7.
+Produce a verification report. For each claim, state which independent source confirms it and whether that source is primary or secondary. The article must contain zero unverifiable claims before proceeding to Stage 7.
 
 ---
 
@@ -205,8 +229,7 @@ Produce a verification report. The article must be clean of unverifiable content
 Use the `skill` tool to load `internal-linking-seo`. Pass the verified article and the sitemap data from Stage 5.
 
 - Prioritize highly relevant pages in the same content cluster (identified in Stages 1-2)
-- Start with exact matches of the primary keyword. 
-- Always use anchor text that could be used describe the content of the target URL
+- Always use anchor text that could describe the content of the target URL
 - Anchor text must appear naturally in body text — rewrite surrounding content slightly to create a natural insertion point, but the meaning of the content must not drift
 - Follow `internal-linking-seo` rules for matching pipeline, skip rules, and link density (2-5 links per 1,000 words, max 150 total)
 
@@ -220,7 +243,6 @@ Write the meta title (50-60 characters) and meta description (150-155 characters
 
 Read the completed article end to end. Verify:
 - [ ] H1 contains primary keyword
-- [ ] All headers use sentence case
 - [ ] No em dashes anywhere
 - [ ] Question headers are answered immediately
 - [ ] Maximum 3 external links
@@ -239,5 +261,7 @@ Read the completed article end to end. Verify:
 - **SERP entity extraction**: Search engines may return different results by region or device. If results seem off, note this in the entity analysis.
 - **Skill availability**: The orchestration depends on 6 other skills. If any are missing, the pipeline will fail at that stage. Check availability before starting.
 - **Content drift**: When rewriting to create internal linking opportunities in Stage 7, do not alter the article's meaning. If you cannot insert a link without changing meaning, skip that link.
-- **Sitemap parsing**: Not all sites expose sitemaps in robots.txt. If the sitemap is unavailable, note it and rely on site navigation patterns observed during earlier stages.
+- **Sitemap domain mismatch**: The source URL's domain is not always the target site for internal linking. Do not assume — ask the user for the sitemap URL. In this session, the source was `sentinelone.com` but the target was `aioutlooks.com`. Assuming the source domain caused every internal link to point to the wrong site.
+- **Sitemap parsing**: Not all sites expose sitemaps in robots.txt. If the sitemap is unavailable, ask the user directly or rely on site navigation patterns observed during earlier stages.
 - **Em dashes**: The agent model may generate em dashes automatically. Scan the final output and replace all em dashes (—) with commas, periods, or sentence breaks before delivering.
+- **Circular fact-checking**: Stage 6 must never use the Stage 1 source URL to verify claims in the draft. The draft was built from that source, so any "match" is meaningless. Trace every claim to an independent primary or secondary source. If no independent source exists for a claim, remove it.
