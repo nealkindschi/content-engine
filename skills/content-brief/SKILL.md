@@ -84,7 +84,6 @@ H1 and H2/H3 structure aligned to search intent and the gap analysis. Include:
 - **Featured snippet format**: paragraph (what is) / ordered list (how to) / table (comparison)
 
 ### E-E-A-T Signals Required
-- Author expertise markers needed
 - Original data or research to include
 - External authoritative sources to cite
 
