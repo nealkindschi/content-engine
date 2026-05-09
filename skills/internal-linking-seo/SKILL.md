@@ -20,14 +20,14 @@ Progress:
 
 **Always fetch the sitemap before matching.** Many site pages are absent from GSC data (new pages, low-traffic pages) but are strong semantic matches.
 
-1. Start with the sitemap index: `https://yoursite.com/sitemap_index.xml`
+1. Ask the use to provide the sitemap index: `https://yoursite.com/sitemap_index.xml`, `https://yoursite.com/sitemap.xml`, etc
 2. Parse it for child sitemap URLs (e.g. `post-sitemap.xml`, `category-sitemap.xml`)
 3. Fetch all child sitemaps to build a complete URL inventory
-4. Extract every `<loc>` URL. Skip category/tag/archive pages — only keep post/pillar pages.
+4. Extract every `<loc>` URL. Skip category/tag/archive pages — only keep post/pillar/news/blog pages.
 
-### 1b. Load GSC CSV
+### 1b. (Optional) Load GSC CSV
 
-The CSV from Search Analytics for Sheets has these columns:
+Ask the user for a CSV from Search Analytics for Sheets. The output will have these columns:
 `Query, Page, Clicks, Impressions, CTR, Position`
 
 Build a mapping:
@@ -111,8 +111,7 @@ Skip a candidate immediately (don't scan the body) if:
 
 For each valid match:
 1. Confirm semantic relevance between the source content topic and the target page's topic
-2. Limit to 2-5 contextual links per 1,000 words of content
-3. Ensure each target page appears only once in the entire content
+2. Ensure each target page appears only once in the entire content
 
 ## Step 4: Insert links
 
@@ -134,7 +133,7 @@ When presenting results, only show what was linked and close calls worth discuss
 **Always include:**
 - The link(s) inserted, with anchor text and placement location
 - Existing link inventory (what was already on the page)
-- Total link count vs. the 2-5 per 1K word target
+- Total link count
 
 **Only include when interesting:**
 - Near-misses — a page was highly relevant to the topic but the exact phrase didn't appear in body text. Flag these briefly: "Close match: `/example-page/` — 'example phrase' appears as 'partial phrase' but not contiguously. Worth a manual review."
