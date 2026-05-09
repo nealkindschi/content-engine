@@ -9,8 +9,9 @@ A 7-stage orchestration pipeline that turns a source URL into a finished, optimi
 
 ## Prerequisites
 
-- `agent-browser` CLI installed and available (`agent-browser install` to set up Chrome)
+- `agent-browser` CLI installed and available (`npm i -g agent-browser && agent-browser install`)
 - The following skills accessible via the `skill` tool:
+  - `agent-browser` — load this for browser interaction instructions
   - `keyword-deep-dive`
   - `content-brief`
   - `write-content`
@@ -38,11 +39,13 @@ Create a `todowrite` checklist with these 7 items and mark them complete as you 
 
 ## Stage 1: Content audit
 
-Open the source URL with agent-browser and extract everything needed for later stages.
+Load the `agent-browser` skill first. Then open the source URL with
+agent-browser and extract everything needed for later stages.
 
 ```
 agent-browser open <source-url>
-agent-browser snapshot -i
+agent-browser wait --load networkidle
+agent-browser get text body
 ```
 
 Read the page content. Document the following:
