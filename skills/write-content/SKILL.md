@@ -87,7 +87,7 @@ Produce the complete article in clean markdown. Follow ALL of these rules:
 
 ### Rhythm and Structure
 - Vary sentence length dramatically. Mix 5-word punches with 30-word complexes. Never 3+ consecutive sentences of similar length.
-- Vary paragraph length. One-sentence paragraphs are fine. So are 6-sentence ones.
+- Vary paragraph length dramatically. One-sentence paragraphs are fine. So are 6-sentence ones.
 - Use fragments for emphasis. Start sentences with "And" or "But" when natural.
 - Include parenthetical asides and brief tangents — humans do this, AI doesn't.
 - Shift registers. After a technical explanation, drop into a casual aside. Uniform register = AI tell.
