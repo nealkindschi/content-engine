@@ -1,0 +1,18 @@
+name = "seo-tools-platform"
+compatibility_date = "2026-04-27"
+
+[[kv_namespaces]]
+binding = "SEO_TOOLS_KV"
+id = "40b3a293f827401ea0360df1defe4007"
+
+[browser]
+binding = "BROWSER"
+
+[ai]
+binding = "AI"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "seo-tools-db"
+database_id = "a591c194-1a06-4e66-9800-5b42efbaa581"
+migrations_dir = "migrations"
