@@ -8,7 +8,7 @@ description: Adds contextual internal links to website content using Search Anal
 ## Workflow
 
 Progress:
-- [ ] Step 1: Discover all site pages via sitemap + load GSC CSV data
+- [ ] Step 1: Discover all site pages via the user-provided sitemap + load GSC CSV data
 - [ ] Step 2: Read the target content and extract its body text themes
 - [ ] Step 3: Fetch relevant candidate pages and match against body text in parallel
 - [ ] Step 4: Insert links with optimized anchor text
