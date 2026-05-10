@@ -170,7 +170,7 @@ The `write-content` skill handles research, content type templates, knowledge ex
 
 **Question headers** — If a header is a question, the content immediately following must answer that question directly. Do not preamble or delay the answer.
 
-**External links** — Link to external sources a maximum of 3 times. Choose authoritative, non-competitor domains.
+**External links** — Choose authoritative, non-competitor domains.
 
 **Sitemap review** — Before writing, ask the user for the target site's XML sitemap URL. Do not assume the source URL's domain is the target domain. Ask explicitly: "What is the target site's post/page sitemap URL? (e.g. https://yoursite.com/post-sitemap.xml)" If unavailable, fall back to the source domain's robots.txt. Parse the full sitemap to build an internal linking candidate inventory for Stage 7.
 
@@ -248,7 +248,6 @@ Read the completed article end to end. Verify:
 - [ ] H1 contains primary keyword
 - [ ] No em dashes anywhere
 - [ ] Question headers are answered immediately
-- [ ] Maximum 3 external links
 - [ ] Ends with a next step (action, not pushy)
 - [ ] Internal links added with natural anchor text
 - [ ] Meta tags present and within character limits
