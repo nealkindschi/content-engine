@@ -35,8 +35,8 @@ The key insight: SEO optimization should be the LAST step, not the first. Writin
 ### Step 3: Content Structure Optimization
 9. **Table of contents**: Add for articles > 1,500 words (jump links)
 10. **Header hierarchy**: H1 -> H2 -> H3 (no skipping levels)
-11. **Short paragraphs**: Max 3-4 sentences (improves mobile readability)
-12. **Scannable elements**: Bold key phrases, use bullet lists for quick-reference items
+11. **Paragraphs**: Vary the length of paragraphs. A paragraph can be between 1-4 sentences (improves mobile readability)
+12. **Scannable elements**: Bold key phrases, use tables when appropriate, use bullet lists for quick-reference items
 13. **Above-the-fold content**: Primary keyword and value proposition visible without scrolling
 
 ### Step 4: Internal Linking
@@ -70,7 +70,7 @@ The key insight: SEO optimization should be the LAST step, not the first. Writin
 24. Target metrics:
    - Flesch Reading Ease: 60-70 (8th-10th grade level)
    - Average sentence length: 15-20 words
-   - Average paragraph length: 3-4 sentences
+   - Average paragraph length: 2-3 sentences
    - Passive voice: < 10% of sentences
 25. Flag sections that exceed complexity thresholds
 
