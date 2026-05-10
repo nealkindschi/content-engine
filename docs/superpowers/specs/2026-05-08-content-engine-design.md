@@ -33,7 +33,7 @@ Builds an entity frequency matrix across SERP and all competitor pages. Ranks en
 Invokes `content-brief`. Supplements with decisions on content type, external sources, length, tables, FAQ, schema, code snippets, lists, and hub/spoke classification — all derived from prior stage findings.
 
 ### Stage 5: Write
-Invokes `write-content`. Additional rules: H1 contains primary keyword, question H2s answer immediately, max 3 external links, no em dashes, next-step ending. Reviews sitemap via robots.txt before writing.
+Invokes `write-content`. Additional rules: H1 contains primary keyword, question H2s answer immediately, adds external links to authoritative sources, no em dashes, next-step ending. Reviews sitemap via robots.txt before writing.
 
 ### Stage 6: Fact-Check
 Invokes `fact-checker`. Hard rule: unverifiable claims are removed, not softened.
