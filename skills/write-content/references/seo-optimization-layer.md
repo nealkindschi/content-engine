@@ -41,15 +41,16 @@ The key insight: SEO optimization should be the LAST step, not the first. Writin
 
 ### Step 4: Internal Linking
 14. Query internal link data for link opportunities
-15. Add 3-5 internal links to related content:
+15. Add internal links to related content:
    - Link FROM the new page TO established pages (passes topic relevance)
    - Link TO the new page FROM established pages (passes authority)
 16. Use descriptive anchor text (not "click here" or "read more")
 17. Link to cornerstone/pillar content where relevant
 
 ### Step 5: External Linking
-18. Include 2-3 external links to authoritative sources:
+18. Include external links to authoritative sources:
    - Government sites, academic papers, industry reports
+   - Do NOT link to competitor pages identified in previous steps
    - These signal trust and support EEAT
 19. Avoid linking to direct competitors
 20. Use `rel="noopener"` for new-tab links (not nofollow for legitimate citations)
