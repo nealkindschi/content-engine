@@ -111,7 +111,7 @@ delve, landscape (metaphorical), testament, leverage, utilize, robust, seamless,
 - Rule-of-three groupings (use 2 or 4 items instead)
 - Synonym cycling (repeat the right word rather than finding alternatives)
 - Copula avoidance ("serves as" — just say "is")
-- Em-dash chains (max 1-2 per 1000 words)
+- Em-dashes
 - Binary contrasts ("it's not X, it's Y" — just make the argument)
 - Participial tack-ons ("...highlighting the importance of X" — delete or make a separate sentence)
 - Clustering of: however, notably, essentially, that said, arguably — fine individually, but 3+ in one article flags AI
@@ -135,7 +135,6 @@ delve, landscape (metaphorical), testament, leverage, utilize, robust, seamless,
 - Primary keyword in meta title, H1, first 100 words, 2-3 H2s. ~2% body density, naturally distributed.
 - Place a 40-60 word direct answer immediately after the most important H2 — targets featured snippets. "How" queries get ordered lists, "what is" gets paragraphs, comparisons get tables.
 - Weave 2-3 PAA questions into the article as H2/H3 headings with direct answers.
-- Include 3-5 internal links per 1,000 words. Use descriptive anchor text — never "click here."
 - Front-load value. The first screen is the highest-value real estate. No preamble paragraphs.
 
 ### Long Article Strategy (1,500+ words)
