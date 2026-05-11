@@ -138,7 +138,7 @@ The content-brief skill handles SERP analysis and brief generation. Supplement i
 
 **Content type** — Based on the source page type and what the SERP rewards for this topic. Pick one type and commit to it.
 
-**External sources** — Which external sites (max 3) should be cited? Prefer authoritative, non-competitor sources.
+**External sources** — Which external sites should be cited? Prefer authoritative, non-competitor sources. If a source is used in the fact-checking stage, you must link to that source.
 
 **Content length** — Match or slightly exceed the top-3 competitor average. Use `content-brief`'s length guidance.
 
