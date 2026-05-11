@@ -20,19 +20,24 @@ Progress:
 
 **Always fetch the sitemap before matching.** Many site pages are absent from GSC data (new pages, low-traffic pages) but are strong semantic matches.
 
-1. Ask the use to provide the sitemap index: `https://yoursite.com/sitemap_index.xml`, `https://yoursite.com/sitemap.xml`, etc
-2. Parse it for child sitemap URLs (e.g. `post-sitemap.xml`, `category-sitemap.xml`)
-3. Fetch all child sitemaps to build a complete URL inventory
-4. Extract every `<loc>` URL. Skip category/tag/archive pages — only keep post/pillar/news/blog pages.
+**Always prompt the user for GSC data before matching.** Supplying this data is optional, but seeing which queries are already ranking for each page gives us a good idea of what anchor text to use for that page.
 
-### 1b. (Optional) Load GSC CSV
+1. Ask the user to provide the sitemap index: `https://yoursite.com/sitemap_index.xml`, `https://yoursite.com/sitemap.xml`, etc
+2. Ask ther to prvide the Google Search Console data. Typically this will be a CSV file.
+3. Parse it for child sitemap URLs (e.g. `post-sitemap.xml`, `category-sitemap.xml`)
+4. Fetch all child sitemaps to build a complete URL inventory
+5. Extract every `<loc>` URL. Skip category/tag/archive pages — only keep post/pillar/news/blog pages.
 
-Ask the user for a CSV from Search Analytics for Sheets. The output will have these columns:
+### 1b. Load Google Search Console CSV
+
+Ask the user for a CSV from Search Analytics for Sheets. Skip if the user does not have it or wants to skip this step. The output will have these columns:
 `Query, Page, Clicks, Impressions, CTR, Position`
+
+Review which queries are appearing in search results for each page. Use these matches as a basis for anchor text.
 
 Build a mapping:
 - Group queries by `Page` (URL)
-- For each page, the queries associated with it are the terms that page should rank for. These are anchor text candidates to use when linking TO that page from other content.
+- For each page, the queries associated with it are the terms that page are ranking rank for. These are anchor text candidates to use when linking TO that page from other content.
 - Prioritize queries with higher impressions or lower (better) position as stronger signals.
 
 ### 1c. Merge into a combined page inventory
