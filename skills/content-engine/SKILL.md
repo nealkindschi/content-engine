@@ -233,7 +233,7 @@ Use the `skill` tool to load `internal-linking-seo`. Pass the verified article a
 
 - Prioritize highly relevant pages in the same content cluster (identified in Stages 1-2)
 - Always use anchor text that could describe the content of the target URL
-- Anchor text must appear naturally in body text — rewrite surrounding content slightly to create a natural insertion point, but the meaning of the content must not drift
+- Anchor text must appear naturally in body text — rewrite surrounding content slightly to create a natural insertion point, but the meaning of the content must not drift. Use semantically similar text in addition to exact matches from URL slugs.
 - Follow `internal-linking-seo` rules for matching pipeline and skip rules
 
 ### 7b: Meta tags
