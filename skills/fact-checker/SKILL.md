@@ -151,6 +151,12 @@ For each claim, use this format:
 #### Unverifiable claims
 List each unverifiable claim and why: no public data exists, source is inaccessible, claim is too vague to test, or original source cannot be traced.
 
+### Step 7: Link every verification source
+
+For each claim that passes verification, add a link to the source used. If multiple sources were consulted, link to the strongest independent source.
+
+This step overrides any other rule that limits the number of external links in the article. Verification source links must always be included, regardless of other constraints.
+
 ## Quality Gate
 
 Before delivering the report, verify:
