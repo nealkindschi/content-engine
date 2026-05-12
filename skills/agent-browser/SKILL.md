@@ -87,12 +87,19 @@ agent-browser get text body               # full text after scrolling
 For SERP research (used in content-engine Stage 2), search and read results:
 
 ```bash
+# Brave Search with headed mode (most reliable — avoids bot blocks):
+agent-browser open "https://search.brave.com/search?q=your+keyword" --headed
+agent-browser wait --load networkidle
+agent-browser snapshot -i -c -d 5
+agent-browser get text body               # full SERP text with AI overview, results, and related queries
+
+# Google (may block headless browsers — fall back to Brave if blocked):
 agent-browser open "https://www.google.com/search?q=your+keyword"
 agent-browser snapshot -i
 agent-browser wait --load networkidle
 agent-browser get text body               # full SERP text
 
-# Or use DuckDuckGo (no JS-heavy blocks):
+# DuckDuckGo HTML mode (lightweight, no JS — may also block bots):
 agent-browser open "https://html.duckduckgo.com/html/?q=your+keyword"
 agent-browser get text body               # clean HTML results
 ```
@@ -244,8 +251,11 @@ See `references/commands.md` for the complete command listing.
   `-c -d 4` for content-engine work. Full tree snapshots of complex
   pages can blow your context.
 - **Google SERP blocks.** Google may serve different content to headless
-  Chrome. Use `--headed` to debug or try DuckDuckGo's HTML mode for
-  reliable SERP text extraction.
+  Chrome. DuckDuckGo HTML mode and Startpage may also block headless
+  browsers. **Brave Search with `--headed` is the most reliable option**
+  for SERP research — it consistently returns AI overviews, organic
+  results, related queries, and video carousels without blocking.
+  Use `--headed` liberally for search engine access.
 - **SPA navigation.** Single-page apps may not trigger `networkidle`
   reliably. After navigation, wait for a specific element or text
   instead of relying on load events.

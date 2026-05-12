@@ -108,7 +108,15 @@ For each competitor page, document the same profile as Stage 1:
 - Schema used
 - Content length
 
-Also search the primary topic on at least two search engines (Google + Brave or DuckDuckGo) and extract entities visible directly on the SERP (featured snippets, PAA questions, knowledge panels, site names in top results).
+Also search the primary topic on at least two search engines and extract entities visible directly on the SERP (featured snippets, PAA questions, knowledge panels, site names in top results).
+
+**Reliable SERP search method:** Use Brave Search with `--headed`. Google and DuckDuckGo both commonly block headless Chrome. Brave Search in headed mode consistently returns results including AI overviews, organic listings, video carousels, and related queries.
+
+```
+agent-browser open "https://search.brave.com/search?q=<primary-topic>" --headed
+agent-browser wait --load networkidle
+agent-browser get text body
+```
 
 ---
 
@@ -170,7 +178,7 @@ The `write-content` skill handles research, content type templates, knowledge ex
 
 **Question headers** — If a header is a question, the content immediately following must answer that question directly. Do not preamble or delay the answer.
 
-**External links** — Choose authoritative, non-competitor domains.
+**External links** — Choose authoritative, non-competitor domains. There is no hard numeric cap on external links. Link to fact-check verification sources whenever a claim relies on them. Do not link to corporate product pages, demo/signup pages, pricing pages, or "request a demo" CTAs even if those pages were used for fact-check verification. Verification sources from Stage 6 should be cited in the fact-check report, but product/sales pages must not appear in the published article.
 
 **Sitemap review** — Before writing, ask the user for the target site's XML sitemap URL. Do not assume the source URL's domain is the target domain. Ask explicitly: "What is the target site's post/page sitemap URL? (e.g. https://yoursite.com/post-sitemap.xml)" If unavailable, fall back to the source domain's robots.txt. Parse the full sitemap to build an internal linking candidate inventory for Stage 7.
 
@@ -233,7 +241,7 @@ Use the `skill` tool to load `internal-linking-seo`. Pass the verified article a
 
 - Prioritize highly relevant pages in the same content cluster (identified in Stages 1-2)
 - Always use anchor text that could describe the content of the target URL
-- Anchor text must appear naturally in body text — rewrite surrounding content slightly to create a natural insertion point, but the meaning of the content must not drift. Use semantically similar text in addition to exact matches from URL slugs.
+- Anchor text must appear naturally in body text — rewrite surrounding content slightly to create a natural insertion point, but the meaning of the content must not drift. Use semantically similar text in addition to exact matches from URL slugs. Do not impose an arbitrary cap on internal link count; insert any natural match even if the anchor text is only semantically similar (not an exact phrase match). The only technical limit is the 150-per-page ceiling from `internal-linking-seo`.
 - Follow `internal-linking-seo` rules for matching pipeline and skip rules
 
 ### 7b: Meta tags
@@ -261,6 +269,7 @@ Read the completed article end to end. Verify:
 - **agent-browser daemon**: agent-browser runs a background daemon. If a previous session is hung, run `agent-browser close --all` before starting.
 - **Snapshot size**: Full-page snapshots can be very large. Use `snapshot -i` for interactive elements or `snapshot -c -d 5` for compact output when you only need structure.
 - **SERP entity extraction**: Search engines may return different results by region or device. If results seem off, note this in the entity analysis.
+- **Brave Search reliability**: Google, DuckDuckGo, and Startpage all commonly block headless Chrome with CAPTCHA challenges. Brave Search in headed mode (`--headed`) is the most reliable search engine for SERP research in this pipeline. Always try Brave Search with `--headed` first before falling back to other engines.
 - **Skill availability**: The orchestration depends on 6 other skills. If any are missing, the pipeline will fail at that stage. Check availability before starting.
 - **Sitemap domain mismatch**: The source URL's domain is not always the target site for internal linking. Do not assume — ask the user for the sitemap URL. In this session, the source was `sentinelone.com` but the target was `aioutlooks.com`. Assuming the source domain caused every internal link to point to the wrong site.
 - **Sitemap parsing**: Not all sites expose sitemaps in robots.txt. If the sitemap is unavailable, ask the user directly or rely on site navigation patterns observed during earlier stages.
