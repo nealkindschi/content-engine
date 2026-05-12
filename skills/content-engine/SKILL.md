@@ -262,7 +262,6 @@ Read the completed article end to end. Verify:
 - **Snapshot size**: Full-page snapshots can be very large. Use `snapshot -i` for interactive elements or `snapshot -c -d 5` for compact output when you only need structure.
 - **SERP entity extraction**: Search engines may return different results by region or device. If results seem off, note this in the entity analysis.
 - **Skill availability**: The orchestration depends on 6 other skills. If any are missing, the pipeline will fail at that stage. Check availability before starting.
-- **Content drift**: When rewriting to create internal linking opportunities in Stage 7, do not alter the article's meaning. If you cannot insert a link without changing meaning, skip that link.
 - **Sitemap domain mismatch**: The source URL's domain is not always the target site for internal linking. Do not assume — ask the user for the sitemap URL. In this session, the source was `sentinelone.com` but the target was `aioutlooks.com`. Assuming the source domain caused every internal link to point to the wrong site.
 - **Sitemap parsing**: Not all sites expose sitemaps in robots.txt. If the sitemap is unavailable, ask the user directly or rely on site navigation patterns observed during earlier stages.
 - **Em dashes**: The agent model may generate em dashes automatically. Scan the final output and replace all em dashes (—) with commas, periods, or sentence breaks before delivering.
