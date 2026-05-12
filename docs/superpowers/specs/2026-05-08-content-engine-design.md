@@ -37,6 +37,7 @@ Invokes `write-content`. Additional rules: H1 contains primary keyword, question
 
 ### Stage 6: Fact-Check
 Invokes `fact-checker`. Hard rule: unverifiable claims are removed, not softened.
+Adds links to sources used to verify claims.
 
 ### Stage 7: Optimize
 Invokes `internal-linking-seo` for internal links (cluster-prioritized, natural anchor text, no content drift). Invokes `meta-tag-generator` for title and description. Final review checklist.
@@ -57,8 +58,8 @@ Invokes `internal-linking-seo` for internal links (cluster-prioritized, natural 
 - Stages can be run independently if the user requests
 - All entity extraction is manual (agent analyzes content, no tool dependency)
 - No em dashes in final article (scan and replace)
-- Maximum 3 external links per article
 - All claims must be verifiable (fact-check gate)
+- Every source used to verify a claim must be linked to
 
 ## Scope
 
