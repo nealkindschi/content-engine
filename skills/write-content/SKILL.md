@@ -145,6 +145,8 @@ delve, landscape (metaphorical), testament, leverage, utilize, robust, seamless,
 
 1. **"So What?" test**: For each major section — could anyone have written this, for anyone, about anything? If yes, inject specific knowledge.
 2. **Self-check**: Scan for blacklisted words, sections where every paragraph starts with a topic sentence, unnecessary section summaries, participial tack-ons. Fix before delivering.
+3. **Paragraph length variation**: Scan for runs of 3+ consecutive paragraphs with similar length. Break the pattern by splitting long paragraphs, merging short ones, or converting content to a table or bulleted list.
+4. **Visual structure check**: Identify dense prose sections of 4+ sentences on a single subtopic. Where content compares items, enumerates categories, or lists sequential steps, convert to a table or bulleted list for scannability.
 
 ### Output
 
