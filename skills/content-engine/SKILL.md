@@ -35,6 +35,24 @@ Create a `todowrite` checklist with these 7 items and mark them complete as you 
 6. Fact-check
 7. Optimize
 
+## Human-in-the-loop requirement
+
+**After every stage, pause and present findings to the user. Do not proceed to the next stage until the user explicitly approves.** Each stage produces decisions that cascade downstream — a mistake in Stage 1 will corrupt every subsequent stage. The user must validate:
+
+- Stage 1: Primary topic, entity list, content type classification
+- Stage 2: Competitor selection, SERP features, intent classification
+- Stage 3: Table-stakes vs opportunity entity assignments
+- Stage 4: Full content brief (the article blueprint)
+- Stage 5: The complete draft article
+- Stage 6: The verification report (what was verified, what was removed)
+- Stage 7: Final article with internal links and meta tags
+
+At each checkpoint:
+1. Summarize what was found or produced in a structured format
+2. Ask: "Does this look correct? Ready to proceed to Stage [N+1]?"
+3. Wait for the user's explicit approval before continuing
+4. If the user requests changes, make them and re-present before moving on
+
 ---
 
 ## Stage 1: Content audit
@@ -73,6 +91,20 @@ Read the page content. Document the following:
 **Content length** — Approximate word count.
 
 Produce a structured audit summary. This feeds Stage 2 and Stage 4.
+
+### Stage 1 checkpoint
+
+Present the audit summary to the user. Include:
+- Primary topic (one sentence)
+- Content type classification
+- Full entity list
+- Header structure (H1-H3)
+- External link domains
+- Content cluster assessment
+- Schema detected
+- Word count
+
+Ask: "Does this audit look correct? Ready to proceed to Stage 2 (SERP research)?"
 
 ---
 
@@ -118,6 +150,17 @@ agent-browser wait --load networkidle
 agent-browser get text body
 ```
 
+### Stage 2 checkpoint
+
+Present the SERP research findings to the user. Include:
+- Top 3-5 competitor URLs (ranked, with a one-line summary of each)
+- SERP features detected (featured snippets, PAA, knowledge panels, video carousels, etc.)
+- Intent classification (informational, commercial, transactional, navigational)
+- Content gaps identified across competitors
+- Multi-engine search consistency notes (if any regional or engine differences)
+
+Ask: "Do these competitors and SERP findings look right? Ready to proceed to Stage 3 (Entity analysis)?"
+
 ---
 
 ## Stage 3: Entity analysis
@@ -135,6 +178,15 @@ Build an entity frequency matrix. Across the SERP and all competitor pages analy
 Rank entities in priority order. The top-ranked entities must be addressed in the content brief and article. Gap entities are optional but encouraged for information gain.
 
 Produce a prioritized entity list with clear table-stakes-vs-opportunity labels.
+
+### Stage 3 checkpoint
+
+Present the entity analysis to the user. Include:
+- The full frequency matrix (table format)
+- Table-stakes entities (must-include) with per-entity frequency counts
+- Opportunity entities (differentiation) with per-entity frequency counts
+
+Ask: "Do these entity priorities look correct? Any entities you want to add, remove, or reclassify? Ready to proceed to Stage 4 (Content brief)?"
 
 ---
 
@@ -161,6 +213,21 @@ The content-brief skill handles SERP analysis and brief generation. Supplement i
 **Lists** — Where ordered or unordered lists improve scannability. Tables preferred over lists but don't force it.
 
 **Hub/spoke classification** — Is this topic a potential hub page, a spoke page to existing content, both, or neither? This feeds internal linking decisions in Stage 7.
+
+### Stage 4 checkpoint
+
+Present the complete content brief to the user. This is the article blueprint — everything downstream depends on it. Include:
+- Content type (final decision)
+- Target word count
+- Outline (H2 structure with brief description of each section)
+- FAQ questions to include
+- Schema type to implement
+- Tables/code snippets/lists plan
+- External sources to cite
+- Hub/spoke classification
+- Entity coverage: which table-stakes and opportunity entities are addressed in which sections
+
+Ask: "Does this brief look right? Any changes to the outline, entities, or structure? Ready to proceed to Stage 5 (Write)?"
 
 ---
 
@@ -192,6 +259,16 @@ The `write-content` skill handles research, content type templates, knowledge ex
 - Do not be pushy in the next-step ending
 
 **Writing voice** — Follow the anti-slop ruleset from `write-content`: no banned vocabulary, no banned phrases, no banned structural patterns. Practitioner tone. Show, don't just state.
+
+### Stage 5 checkpoint
+
+Present the complete draft article to the user. Do not proceed until the user has read and approved it. Include a brief summary of:
+- Word count
+- H2 count and structure
+- External links included (domains and what they link to)
+- Entity coverage check (which entities from Stage 3 were addressed)
+
+Ask: "Here is the full draft. Does it read well? Any changes needed before fact-checking? Ready to proceed to Stage 6 (Fact-check)?"
 
 ---
 
@@ -231,6 +308,17 @@ Verify: statistics, dates, product claims, attributions, technical assertions, c
 
 Produce a verification report. For each claim, state which independent source confirms it and whether that source is primary or secondary. The article must contain zero unverifiable claims before proceeding to Stage 7.
 
+### Stage 6 checkpoint
+
+Present the verification report to the user. Include:
+- Number of claims checked
+- Number verified (with independent sources listed)
+- Number removed as unverifiable (with the claim text and reason)
+- Any claims that were modified (original vs corrected text)
+- The revised article with all changes applied
+
+Ask: "Here is the fact-check report. Do the verifications and removals look correct? Any claims you want to revisit? Ready to proceed to Stage 7 (Optimize)?"
+
 ---
 
 ## Stage 7: Optimize
@@ -261,6 +349,18 @@ Read the completed article end to end. Verify:
 - [ ] Meta tags present and within character limits
 - [ ] All claims are verifiable
 - [ ] Entity priorities from Stage 3 are addressed
+
+### Stage 7 checkpoint
+
+Present the final article to the user. Include:
+- The complete article with internal links and meta tags
+- Internal link summary: which target pages were linked, with anchor text
+- Meta title and meta description (with character counts)
+- Final review checklist results (all items must pass)
+
+Ask: "Here is the final article. Does everything look good? Any final adjustments?"
+
+This is the delivery gate. Only mark the task complete when the user confirms.
 
 ---
 

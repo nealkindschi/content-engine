@@ -55,6 +55,7 @@ Invokes `internal-linking-seo` for internal links (cluster-prioritized, natural 
 ## Constraints
 
 - Linear pipeline: stages run in order, each completes before the next
+- Human-in-the-loop: after each stage, the agent pauses and presents findings to the user. The next stage does not begin until the user explicitly approves.
 - Stages can be run independently if the user requests
 - All entity extraction is manual (agent analyzes content, no tool dependency)
 - No em dashes in final article (scan and replace)
